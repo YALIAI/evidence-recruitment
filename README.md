@@ -2,6 +2,19 @@
 
 An English recruitment workspace for comparing a job description with up to six resumes. Reports show quoted evidence, points to verify and interview questions. Evidence status is not a hiring recommendation or candidate ranking.
 
+## Browser-only matching (v1.2)
+
+Select **Analyze resume evidence** after pasting an English job description and resume text. No model, API, backend, network request or persistent storage is used for analysis.
+
+- Named technical skills are extracted using an editable alias dictionary in `src/matcher.mjs`.
+- Required/preferred headings determine priority; review the extracted job context.
+- Exact resume passages show direct mentions, limited/negative mentions or lexical hints retrieved with TF-IDF cosine similarity.
+- Direct mention does not verify skill proficiency, years, recency or compound requirements. Alternatives may appear as separate criteria; they are not rejection conditions.
+- Generic requirements use lexical retrieval only. English negation/context checks are heuristic, not comprehensive. Non-English text, PDFs, inferred skill years and semantic embeddings are not supported in this version.
+- The lexical threshold is an uncalibrated retrieval heuristic, not a probability. There is no candidate ranking or hiring score.
+- Reports are invalidated when inputs change. Markdown exports include job context and matching reasons. Manual reviews remain separate.
+- Run `node --test tests/matcher.test.mjs` for regression checks.
+
 ## Manual screening workspace (v1.1)
 
 - Edit up to 12 job-related required/preferred criteria.
@@ -12,7 +25,7 @@ An English recruitment workspace for comparing a job description with up to six 
 - Export all candidate reviews to CSV, with spreadsheet formula protection.
 - Changing job/resume inputs clears manual reviews; changing criterion wording or priority clears evidence assessments.
 - All manual review data is session-only. Export before closing.
-- AI remains disconnected; manual reviews are not AI assessments or candidate rankings.
+- Local matching is available; manual reviews remain separate from algorithm suggestions.
 
 ### Product references
 
@@ -29,7 +42,7 @@ The workflow borrows concepts, not proprietary code or branding:
 - Editable job description and candidate resumes.
 - Responsive layout and keyboard-accessible controls.
 - Inputs remain in memory only; they are cleared on reload or closing the page.
-- **Live AI analysis is not connected.** The ADAS example is explicitly labelled as a preset report.
+- **Live local matching is available without AI.** The ADAS example is explicitly labelled as a preset report.
 
 ## Publish on GitHub Pages
 

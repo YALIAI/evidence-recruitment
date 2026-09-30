@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {analyzeLocal,extractRequirements} from '../src/matcher.mjs';
+const report=(job,resume)=>analyzeLocal(job,[{id:'x',resume}])[0];
+test('aliases and exact evidence',()=>{const r=report('Required: C++, Linux, Python','Developed C++ modules on Ubuntu. Used Python.');assert.equal(r.rows.length,3);assert.ok(r.rows.every(x=>x.status==='supported'));for(const x of r.rows)assert.ok('Developed C++ modules on Ubuntu. Used Python.'.includes(x.evidence));});
+test('related LiDAR experience does not establish fusion',()=>{const r=report('Required: sensor fusion','Researched LiDAR denoising.');assert.equal(r.rows[0].status,'unknown');});
+test('negative and learning mentions cannot establish qualification',()=>{for(const text of ['No Python experience.','Learning Python in a course.','Not familiar with Python.'])assert.notEqual(report('Required: Python',text).rows[0].status,'supported');});
+test('skill boundaries do not match Java inside JavaScript or C++ inside C#',()=>{assert.equal(report('Required: Java','Used JavaScript.').rows[0].status,'unknown');assert.equal(report('Required: C++','Used C#.').rows[0].status,'unknown');});
+test('preferred headings and compound context are retained',()=>{const rs=extractRequirements('Required: Python\nPreferred: SQL and AWS');assert.equal(rs[0].priority,'Required');assert.equal(rs[1].priority,'Preferred');assert.equal(rs[2].source,'SQL and AWS');});
+test('lexical retrieval is a hint, never direct qualification',()=>{const r=report('Build robust distributed pipelines','Built distributed pipelines for vehicle data.');assert.equal(r.rows[0].status,'partial');});
+test('all candidates share criteria and evidence never crosses candidates',()=>{const rs=analyzeLocal('Required: Python',[{id:'a',resume:'Used Python.'},{id:'b',resume:'Managed sales.'}]);assert.equal(rs[0].rows[0].status,'supported');assert.equal(rs[1].rows[0].evidence,'');assert.deepEqual(rs[0].rows.map(x=>x.requirement),rs[1].rows.map(x=>x.requirement));});
