@@ -2,6 +2,14 @@
 
 An English recruitment workspace for comparing a job description with up to six resumes. Reports show quoted evidence, points to verify and interview questions. Evidence status is not a hiring recommendation or candidate ranking.
 
+## Two workspace modes (v1.3)
+
+- **HR · Review candidates**: paste a JD and up to six candidate resumes/profile texts, run local matching and review manually. No candidate sourcing or LinkedIn integration is implemented.
+- **Job seeker · Find jobs**: paste a resume, search current Platsbanken adverts through the public JobTech `/search` API, view descriptions, match individual jobs and export reports. Search sends keywords only, never resume text. Location filtering is local within the first 50 keyword results; it does not cover all matching jobs.
+- JobTech requests are live and require connectivity. Errors, empty results and loading states are shown. Query changes clear results; resume edits clear match reports.
+- Job descriptions may be Swedish. Matching is English-focused and does not translate. Dates and original advert links are displayed for verification.
+- No PDF upload, automatic application, candidate ranking or model backend is included.
+
 ## Browser-only matching (v1.2)
 
 Select **Analyze resume evidence** after pasting an English job description and resume text. No model, API, backend, network request or persistent storage is used for analysis.
