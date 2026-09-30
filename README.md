@@ -2,6 +2,27 @@
 
 An English recruitment workspace for comparing a job description with up to six resumes. Reports show quoted evidence, points to verify and interview questions. Evidence status is not a hiring recommendation or candidate ranking.
 
+## Manual screening workspace (v1.1)
+
+- Edit up to 12 job-related required/preferred criteria.
+- Compare candidate evidence side by side.
+- Record exact resume quotes, evidence status, skill years, last-used month, and interview questions.
+- A Supported/Partial assessment requires a quote that exists verbatim in the resume.
+- Candidate stages (New, Reviewing, Interview, On hold), search and stage filtering.
+- Export all candidate reviews to CSV, with spreadsheet formula protection.
+- Changing job/resume inputs clears manual reviews; changing criterion wording or priority clears evidence assessments.
+- All manual review data is session-only. Export before closing.
+- AI remains disconnected; manual reviews are not AI assessments or candidate rankings.
+
+### Product references
+
+The workflow borrows concepts, not proprietary code or branding:
+
+- [CVViZ](https://cvviz.com/product/resume-screening/): configurable job criteria and explainable resume evidence.
+- [Zoho Recruit](https://help.zoho.com/portal/en/kb/recruit/zia/overview/articles/zia-matching-overview): skill experience and last-use information; recorded manually here.
+- [Manatal](https://www.manatal.com/features/manatal-ai): candidate management and review workflow.
+- [Workable](https://www.workable.com/features): consistent recruitment review workflow.
+
 ## Current capabilities
 
 - English interface, ADAS example resumes, example reports and Markdown export.
